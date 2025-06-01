@@ -2,11 +2,21 @@ import { useState } from "react";
 import { SearchInput } from "../../components/SearchInput/SearchInput";
 import { MovieList } from "../../components/MovieList/MovieList";
 import { useSearchMoviesQuery } from "../../store/movieApi";
+import { useHeader } from "../../hooks/useHeader";
+import { Loader } from "../../components/Loader";
+import { useErrorBoundary } from "react-error-boundary";
+import { usePagination } from "../../hooks";
 
 export function Movies() {
+  useHeader({
+    backButton: false,
+    content: [{ name: "Favorites", href: "/favourites" }],
+  });
+  const { showBoundary } = useErrorBoundary();
   const [searchQuery, setSearchQuery] = useState("");
   const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
+  const { page, setPage } = usePagination({});
+
   const { data, isLoading, error } = useSearchMoviesQuery(
     { query, page },
     { skip: !query }
@@ -20,18 +30,14 @@ export function Movies() {
     }
   };
 
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-  };
-
   if (isLoading) {
-    return <div className="loading">Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {
-    return <div className="error">Error: {error.toString()}</div>;
+    showBoundary(error);
   }
-  console.log(JSON.stringify(data, null, 2));
+
   return (
     <>
       <SearchInput
@@ -41,12 +47,7 @@ export function Movies() {
         isLoading={isLoading}
       />
       {data && (
-        <MovieList
-          movies={data.results}
-          currentPage={page}
-          totalPages={data.total_pages}
-          onPageChange={handlePageChange}
-        />
+        <MovieList movies={data.results} totalPages={data.total_pages} />
       )}
     </>
   );

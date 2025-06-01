@@ -3,11 +3,20 @@ import { MovieList } from "../../components/MovieList/MovieList";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
 import { Container, EmptyState } from "./styled";
+import { useHeader } from "../../hooks/useHeader";
+import { Loader } from "../../components/Loader";
+import { useErrorBoundary } from "react-error-boundary";
 
 export function Favourites() {
   const favorites = useSelector(
     (state: RootState) => state.favorites.favorites
   );
+  const { showBoundary } = useErrorBoundary();
+
+  useHeader({
+    backButton: false,
+    content: [{ name: "Search", href: "/" }],
+  });
 
   const {
     data: movies,
@@ -28,11 +37,11 @@ export function Favourites() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {
-    return <div>Error loading favorites</div>;
+    showBoundary(error);
   }
 
   if (!movies) {
@@ -41,12 +50,7 @@ export function Favourites() {
 
   return (
     <Container>
-      <MovieList
-        movies={movies}
-        currentPage={1}
-        totalPages={1}
-        onPageChange={() => {}}
-      />
+      <MovieList movies={movies} />
     </Container>
   );
 }

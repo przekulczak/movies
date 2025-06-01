@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetMovieDetailsQuery } from "../../store/movieApi";
 import { FavoriteButton } from "../../components/FavoriteButton/FavoriteButton";
 import {
@@ -15,15 +15,19 @@ import {
   Countries,
   Country,
 } from "./styled";
+import { useHeader } from "../../hooks/useHeader";
+import { Loader } from "../../components/Loader";
 
 export function Movie() {
+  useHeader({
+    backButton: true,
+    content: [],
+  });
   const { id } = useParams();
-  const navigate = useNavigate();
   const { data: movie, isLoading, error } = useGetMovieDetailsQuery(Number(id));
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error || !movie) return <div>Error loading movie</div>;
-  console.log(JSON.stringify(movie, null, 2));
   return (
     <Container>
       <Card>

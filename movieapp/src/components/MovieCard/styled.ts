@@ -32,6 +32,7 @@ export const Poster = styled.img`
   width: 100%;
   object-fit: contain;
   margin-bottom: 10px;
+  height: 324px;
 `;
 
 export const Content = styled.div`

@@ -1,37 +1,28 @@
 import type { Movie } from "../../types/movie";
 import { MovieCard } from "../MovieCard/MovieCard";
-import { Pagination } from "../Pagination/Pagination";
 import { MovieListWrapper } from "./styled";
+import { usePagination } from "../../hooks";
 
 interface Props {
   movies: Movie[];
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
+  totalPages?: number;
 }
 
-export function MovieList({
-  movies,
-  currentPage,
-  totalPages,
-  onPageChange,
-}: Props) {
-  const pagination = (
-    <Pagination
-      currentPage={currentPage}
-      totalPages={totalPages}
-      onPageChange={onPageChange}
-    />
-  );
+export function MovieList({ movies, totalPages }: Props) {
+  const { paginationComponent } = usePagination({
+    itemsCount: movies.length,
+    totalPages,
+  });
+
   return (
     <>
-      {pagination}
+      {paginationComponent}
       <MovieListWrapper>
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </MovieListWrapper>
-      {pagination}
+      {paginationComponent}
     </>
   );
 }

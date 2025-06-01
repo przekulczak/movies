@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   width: 100%;
   box-sizing: border-box;
 `;
@@ -27,13 +27,12 @@ export const BackButton = styled.button`
   }
 `;
 
-export const FavoritesLink = styled.a`
-  color: #646cff;
-  text-decoration: none;
+export const TopbarLink = styled.a`
   font-size: 1rem;
   padding: 8px 16px;
   border-radius: 8px;
   transition: color 0.2s;
+  color: #fff;
 
   &:hover {
     color: #535bf2;
