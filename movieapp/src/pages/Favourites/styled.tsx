@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.section`
   padding: 20px;
 `;
 
-export const EmptyState = styled.div`
+export const EmptyState = styled.section`
   text-align: center;
   padding: 40px;
   color: #a0a0a0;

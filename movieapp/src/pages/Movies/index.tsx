@@ -28,10 +28,6 @@ export function Movies() {
     }
   };
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   if (error) {
     showBoundary(error);
   }
@@ -44,8 +40,13 @@ export function Movies() {
         onSubmit={handleSubmit}
         isLoading={isLoading}
       />
-      {data && (
-        <MovieList movies={data.results} totalPages={data.total_pages} />
+      {/* handle empty results */}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data && (
+          <MovieList movies={data.results} totalPages={data.total_pages} />
+        )
       )}
     </>
   );

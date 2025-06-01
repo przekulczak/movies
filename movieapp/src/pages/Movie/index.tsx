@@ -16,7 +16,7 @@ import {
   Country,
 } from "./styled";
 import { useHeader } from "../../hooks/useHeader";
-
+import type { MovieDetails } from "../../types";
 export function Movie() {
   useHeader({
     backButton: true,
@@ -32,7 +32,8 @@ export function Movie() {
       <Card>
         <Poster
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={movie.title}
+          // this is decarative element, so it doesn't need alt text
+          alt={""}
         />
         <Info>
           <Title>
@@ -41,9 +42,9 @@ export function Movie() {
             <FavoriteButton movieId={movie.id} />
           </Title>
           <Meta>
-            <Rating>⭐ {movie.vote_average.toFixed(1)}</Rating>
-            <span>{movie.release_date.split("-")[0]}</span>
-            <span>{movie.runtime} min</span>
+            <Rating>⭐ {movie.vote_average?.toFixed(1)}</Rating>
+            <span>{movie.release_date?.split("-")[0]}</span>
+            <span>{movie.runtime ? `${movie.runtime} min` : ""}</span>
             {movie.imdb_id && (
               <ImdbLink
                 href={`https://www.imdb.com/title/${movie.imdb_id}`}
@@ -56,12 +57,19 @@ export function Movie() {
           </Meta>
           {movie.production_countries.length > 0 && (
             <Countries>
-              {movie.production_countries.map((country) => (
-                <Country key={country.iso_3166_1}>{country.name}</Country>
-              ))}
+              {movie.production_countries.map(
+                (
+                  country: Pick<
+                    MovieDetails,
+                    "production_countries"
+                  >["production_countries"][number]
+                ) => (
+                  <Country key={country.iso_3166_1}>{country.name}</Country>
+                )
+              )}
             </Countries>
           )}
-          <Overview>{movie.overview}</Overview>
+          {movie.overview && <Overview>{movie.overview}</Overview>}
         </Info>
       </Card>
     </Container>

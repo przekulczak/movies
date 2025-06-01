@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MovieListWrapper = styled.div`
+export const MovieListWrapper = styled.section`
   display: grid;
   gap: 20px;
   padding: 20px;

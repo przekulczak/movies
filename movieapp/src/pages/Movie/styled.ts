@@ -6,7 +6,7 @@ export const Container = styled.div`
   padding: 20px;
 `;
 
-export const Card = styled.div`
+export const Card = styled.section`
   display: flex;
   gap: 20px;
   padding: 20px;

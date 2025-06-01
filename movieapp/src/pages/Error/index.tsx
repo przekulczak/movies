@@ -2,7 +2,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import type { FallbackProps } from "react-error-boundary";
 import styled from "styled-components";
 
-const ErrorContainer = styled.div`
+const ErrorContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;

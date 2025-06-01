@@ -15,7 +15,7 @@ export const CardLink = styled.a`
   }
 `;
 
-export const Card = styled.div`
+export const Card = styled.section`
   background: #1a1a1a;
   border-radius: 8px;
   overflow: hidden;
@@ -35,7 +35,7 @@ export const Poster = styled.img`
   height: 324px;
 `;
 
-export const Content = styled.div`
+export const Content = styled.section`
   padding: 16px;
   flex: 1;
   display: flex;
