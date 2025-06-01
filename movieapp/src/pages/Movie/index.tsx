@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetMovieDetailsQuery } from "../../store/movieApi";
-import { FavoriteButton } from "../../components/FavoriteButton/FavoriteButton";
+import { FavoriteButton, Loader } from "../../components";
 import {
   Container,
   Card,
@@ -16,7 +16,6 @@ import {
   Country,
 } from "./styled";
 import { useHeader } from "../../hooks/useHeader";
-import { Loader } from "../../components/Loader";
 
 export function Movie() {
   useHeader({

@@ -1,5 +1,5 @@
 import type { Movie } from "../../types/movie";
-import { MovieCard } from "../MovieCard/MovieCard";
+import { MovieCard } from "../MovieCard";
 import { MovieListWrapper } from "./styled";
 import { usePagination } from "../../hooks";
 

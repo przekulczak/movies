@@ -7,7 +7,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store/store.ts";
 import { ErrorBoundary } from "react-error-boundary";
 import { enableMocking } from "./helpers/enableMocking.ts";
-import { Fallback } from "./components/Fallback";
+import { Fallback } from "./components";
 
 enableMocking().then(() => {
   createRoot(document.getElementById("root")!).render(

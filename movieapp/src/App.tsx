@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Topbar } from "./components/Topbar/Topbar";
+import { Topbar } from "./components";
 import { Movies, Movie, Favourites } from "./pages";
 function App() {
   return (

@@ -1,10 +1,9 @@
 import { useGetMultipleMoviesQuery } from "../../store/movieApi";
-import { MovieList } from "../../components/MovieList/MovieList";
+import { MovieList, Loader } from "../../components";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
 import { Container, EmptyState } from "./styled";
 import { useHeader } from "../../hooks/useHeader";
-import { Loader } from "../../components/Loader";
 import { useErrorBoundary } from "react-error-boundary";
 
 export function Favourites() {

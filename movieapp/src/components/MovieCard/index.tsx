@@ -1,6 +1,6 @@
 import type { Movie } from "../../types/movie";
 import { Card, Title, Poster } from "./styled";
-import { FavoriteButton } from "../FavoriteButton/FavoriteButton";
+import { FavoriteButton } from "../FavoriteButton";
 
 interface Props {
   movie: Movie;

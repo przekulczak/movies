@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { SearchInput } from "../../components/SearchInput/SearchInput";
-import { MovieList } from "../../components/MovieList/MovieList";
+import { SearchInput, Loader, MovieList } from "../../components";
 import { useSearchMoviesQuery } from "../../store/movieApi";
 import { useHeader } from "../../hooks/useHeader";
-import { Loader } from "../../components/Loader";
 import { useErrorBoundary } from "react-error-boundary";
 import { usePagination } from "../../hooks";
 
