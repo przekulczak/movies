@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setBackButton, setContent } from "../store/headerSlice";
-import type { HeaderContent } from "../types/navigation";
+import type { HeaderContent } from "../types";
 
 export function useHeader({
   backButton,

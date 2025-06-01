@@ -50,3 +50,8 @@ export interface MovieDetails {
   vote_average: number;
   vote_count: number;
 }
+
+export interface HeaderContent {
+  name: string;
+  href: string;
+}

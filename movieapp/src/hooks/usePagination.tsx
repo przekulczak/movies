@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Pagination } from "../components/Pagination/Pagination";
+import { Pagination } from "../components";
 import { useSearchParams } from "react-router-dom";
 
 interface UsePaginationProps {

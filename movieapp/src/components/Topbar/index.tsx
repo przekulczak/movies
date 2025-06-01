@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Container, BackButton, TopbarLink } from "./styled";
 import type { RootState } from "../../store/store";
-import type { HeaderContent } from "../../types/navigation";
+import type { HeaderContent } from "../../types";
 
 export function Topbar() {
   const navigate = useNavigate();

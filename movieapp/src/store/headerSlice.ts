@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { HeaderContent } from "../types/navigation";
+import type { HeaderContent } from "../types";
 
 interface HeaderState {
   backButton: boolean;
