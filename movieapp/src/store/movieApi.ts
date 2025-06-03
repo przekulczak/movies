@@ -2,23 +2,12 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { Movie, MovieDetails } from "../types";
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 
-const TMDB_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YTllNTA2ZDI3ZDUwNGRlYzk3MTM4MGJlYTcwM2Y1MyIsIm5iZiI6MTc0ODU0NTUyNi42Nywic3ViIjoiNjgzOGFmZjYxZDljNzk3ODM2YTg3ZjhiIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.fv_qQ9Oo8vqT3hAqiFAPXFtMy2Wf8ZanwyhuBAR42PU";
-const USE_BACKEND = false;
-const BASE_URL = USE_BACKEND
-  ? "http://localhost:8000"
-  : "https://api.themoviedb.org/3";
+const BASE_URL = "http://localhost:8000";
 
 export const movieApi = createApi({
   reducerPath: "movieApi",
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
-    prepareHeaders: (headers) => {
-      if (!USE_BACKEND) {
-        headers.set("Authorization", `Bearer ${TMDB_TOKEN}`);
-      }
-      return headers;
-    },
   }),
   endpoints: (builder) => ({
     searchMovies: builder.query<
@@ -26,10 +15,7 @@ export const movieApi = createApi({
       { query: string; page: number }
     >({
       query: ({ query, page }) => ({
-        url: USE_BACKEND
-          ? `/search/movie?query=${query}&page=${page}`
-          : `/search/movie`,
-        params: USE_BACKEND ? undefined : { query, page },
+        url: `/search/movie?query=${query}&page=${page}`,
       }),
     }),
     getMovieDetails: builder.query<MovieDetails, number>({
