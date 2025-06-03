@@ -33,16 +33,6 @@ pnpm test
 pnpm test:ui
 ```
 
-- Run tests with coverage:
-```bash
-pnpm test:coverage
-```
-
-- Run e2e tests (Playwright):
-```bash
-pnpm test:e2e
-```
-
 ## Features
 
 ### Home Page with Search
