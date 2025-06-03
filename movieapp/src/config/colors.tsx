@@ -5,4 +5,13 @@ export const colors = {
   buttonDisabledHover: "#3a3a3a",
   buttonActiveFocus: "#535bf2",
   buttonDisabledFocus: "#3a3a3a",
+  backgroundSecondary: "#1a1a1a",
+  textPrimary: "#ffffff",
+  textSecondary: "#666",
+  favourite: "#646cff",
+  error: "#ff4d4d",
+  errorBackground: "rgba(255, 0, 0, 0.1)",
+  textTertiary: "#a0a0a0",
+  externalLink: "#f5c518",
+  badge: "rgb(61, 61, 61)",
 };

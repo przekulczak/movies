@@ -1,74 +1,24 @@
-import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { SearchInput } from "..";
+import { describe, it, expect, vi } from "vitest";
+import { SearchInput } from "../index";
 
 describe("SearchInput", () => {
-  const mockOnChange = vi.fn();
-  const mockOnSubmit = vi.fn();
-
   it("renders search input with correct label and placeholder", () => {
-    render(
-      <SearchInput value="" onChange={mockOnChange} onSubmit={mockOnSubmit} />
-    );
+    render(<SearchInput />);
 
     expect(screen.getByLabelText("Search Movies")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Search movies...")).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText("Type to search...")
+    ).toBeInTheDocument();
   });
 
   it("calls onChange when input value changes", () => {
-    render(
-      <SearchInput value="" onChange={mockOnChange} onSubmit={mockOnSubmit} />
-    );
+    const handleChange = vi.fn();
+    render(<SearchInput onChange={handleChange} />);
 
-    const input = screen.getByLabelText("Search Movies");
+    const input = screen.getByPlaceholderText("Type to search...");
     fireEvent.change(input, { target: { value: "test" } });
 
-    expect(mockOnChange).toHaveBeenCalledWith("test");
-  });
-
-  it("calls onSubmit when search button is clicked", () => {
-    render(
-      <SearchInput
-        value="test"
-        onChange={mockOnChange}
-        onSubmit={mockOnSubmit}
-      />
-    );
-
-    const button = screen.getByRole("button", { name: "Search" });
-    fireEvent.click(button);
-
-    expect(mockOnSubmit).toHaveBeenCalled();
-  });
-
-  it("calls onSubmit when Enter key is pressed", () => {
-    render(
-      <SearchInput
-        value="test"
-        onChange={mockOnChange}
-        onSubmit={mockOnSubmit}
-      />
-    );
-
-    const input = screen.getByLabelText("Search Movies");
-    fireEvent.keyDown(input, { key: "Enter" });
-
-    expect(mockOnSubmit).toHaveBeenCalled();
-  });
-
-  it("shows loading state when isLoading is true", () => {
-    render(
-      <SearchInput
-        value="test"
-        onChange={mockOnChange}
-        onSubmit={mockOnSubmit}
-        isLoading={true}
-      />
-    );
-
-    expect(
-      screen.getByRole("button", { name: "Searching..." })
-    ).toBeInTheDocument();
-    expect(screen.getByRole("button")).toBeDisabled();
+    expect(handleChange).toHaveBeenCalled();
   });
 });

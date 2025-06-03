@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../config";
 
 export const CardLink = styled.a`
   text-decoration: none;
@@ -16,7 +17,7 @@ export const CardLink = styled.a`
 `;
 
 export const Card = styled.section`
-  background: #1a1a1a;
+  background: ${colors.backgroundSecondary};
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s;
@@ -49,10 +50,10 @@ export const Title = styled.a`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
+  color: ${colors.textPrimary};
   cursor: pointer;
 
   &:hover {
-    color: #646cff;
+    color: ${colors.buttonActiveHover};
   }
 `;

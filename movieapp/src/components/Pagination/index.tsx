@@ -1,19 +1,21 @@
 import { Container, Button } from "./styled";
+import { usePageParams } from "../../hooks";
 
 interface Props {
-  currentPage: number;
   totalPages: number;
-  onPageChange: (page: number) => void;
+  disabled?: boolean;
 }
 
-export function Pagination({ currentPage, totalPages, onPageChange }: Props) {
+export function Pagination({ totalPages, disabled }: Props) {
+  const { page, setPage } = usePageParams();
+
   const getPageNumbers = () => {
     const pages = [];
     const showPages = 2;
 
     for (
-      let i = Math.max(1, currentPage - showPages);
-      i <= Math.min(totalPages, currentPage + showPages);
+      let i = Math.max(1, page - showPages);
+      i <= Math.min(totalPages, page + showPages);
       i++
     ) {
       pages.push(i);
@@ -25,25 +27,26 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Props) {
   return (
     <Container>
       <Button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
+        onClick={() => setPage(page - 1)}
+        disabled={page === 1 || disabled}
       >
         Previous
       </Button>
 
-      {getPageNumbers().map((page) => (
+      {getPageNumbers().map((pageNumber) => (
         <Button
-          key={page}
-          $active={page === currentPage}
-          onClick={() => onPageChange(page)}
+          key={pageNumber}
+          $active={pageNumber === page}
+          onClick={() => setPage(pageNumber)}
+          disabled={disabled}
         >
-          {page}
+          {pageNumber}
         </Button>
       ))}
 
       <Button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
+        onClick={() => setPage(page + 1)}
+        disabled={page === totalPages || disabled}
       >
         Next
       </Button>

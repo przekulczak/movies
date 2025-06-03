@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { Movie, MovieDetails } from "../types/movie";
+import type { Movie, MovieDetails } from "../types";
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 
 const TMDB_TOKEN =
@@ -44,10 +44,12 @@ export const movieApi = createApi({
 
           const successfulResults = results
             .filter(
-              (result): result is PromiseFulfilledResult<any> =>
+              (
+                result
+              ): result is PromiseFulfilledResult<{ data: MovieDetails }> =>
                 result.status === "fulfilled" && result.value.data !== undefined
             )
-            .map((result) => result.value.data as MovieDetails);
+            .map((result) => result.value.data);
 
           if (successfulResults.length === 0) {
             return {
@@ -59,7 +61,7 @@ export const movieApi = createApi({
           }
 
           return { data: successfulResults };
-        } catch (error) {
+        } catch {
           return {
             error: {
               status: 500,

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../config";
 
 export const Container = styled.div`
   max-width: 1200px;
@@ -10,9 +11,10 @@ export const Card = styled.section`
   display: flex;
   gap: 20px;
   padding: 20px;
-  background: #1a1a1a;
+  background: ${colors.backgroundSecondary};
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
 `;
 
 export const Poster = styled.img`
@@ -32,7 +34,7 @@ export const Info = styled.div`
 export const Title = styled.h1`
   font-size: 2rem;
   font-weight: 600;
-  color: #ffffff;
+  color: ${colors.textPrimary};
   margin: 0;
   display: flex;
   align-items: center;
@@ -42,7 +44,7 @@ export const Title = styled.h1`
 export const Meta = styled.div`
   display: flex;
   gap: 16px;
-  color: #a0a0a0;
+  color: ${colors.textTertiary};
   font-size: 1rem;
   flex-wrap: wrap;
 `;
@@ -54,15 +56,14 @@ export const Rating = styled.span`
 `;
 
 export const Overview = styled.p`
-  color: #e0e0e0;
+  color: ${colors.textPrimary};
   line-height: 1.6;
   font-size: 1.1rem;
   margin: 0;
 `;
 
 export const ImdbLink = styled.a`
-  color: #f5c518;
-  text-decoration: none;
+  color: ${colors.externalLink};
   display: flex;
   align-items: center;
   gap: 4px;
@@ -75,8 +76,8 @@ export const ImdbLink = styled.a`
 `;
 
 export const AdultBadge = styled.span`
-  background: #ff4444;
-  color: white;
+  background: ${colors.error};
+  color: ${colors.textPrimary};
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 0.8rem;
@@ -90,7 +91,7 @@ export const Countries = styled.div`
 `;
 
 export const Country = styled.span`
-  background: #2a2a2a;
+  background: ${colors.badge};
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 0.9rem;

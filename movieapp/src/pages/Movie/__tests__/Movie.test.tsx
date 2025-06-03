@@ -4,14 +4,17 @@ import { Movie } from "../index";
 import { Provider } from "react-redux";
 import { store } from "../../../store/store";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
 
 const renderMovie = (movieId: string) => {
   return render(
     <Provider store={store}>
       <MemoryRouter initialEntries={[`/movie/${movieId}`]}>
-        <Routes>
-          <Route path="/movie/:id" element={<Movie />} />
-        </Routes>
+        <ErrorBoundary fallback={<div>Error</div>}>
+          <Routes>
+            <Route path="/movie/:id" element={<Movie />} />
+          </Routes>
+        </ErrorBoundary>
       </MemoryRouter>
     </Provider>
   );

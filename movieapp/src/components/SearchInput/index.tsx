@@ -1,13 +1,12 @@
-import { Button, Container, Input, InputWrapper, Label } from "./sytled";
+import { Container, Input, InputWrapper, Label } from "./sytled";
 
 interface Props {
-  value: string;
-  onChange: (value: string) => void;
-  onSubmit: (e: React.FormEvent) => void;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isLoading?: boolean;
 }
 
-export function SearchInput({ value, onChange, onSubmit, isLoading }: Props) {
+export function SearchInput({ value, onChange }: Props) {
   return (
     <Container>
       <InputWrapper>
@@ -15,15 +14,11 @@ export function SearchInput({ value, onChange, onSubmit, isLoading }: Props) {
         <Input
           id="movie-search"
           type="text"
-          placeholder="Search movies..."
+          placeholder="Type to search..."
           value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && onSubmit(e)}
+          onChange={onChange}
         />
       </InputWrapper>
-      <Button onClick={onSubmit} disabled={isLoading}>
-        {isLoading ? "Searching..." : "Search"}
-      </Button>
     </Container>
   );
 }

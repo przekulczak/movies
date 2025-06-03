@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useGetMovieDetailsQuery } from "../../store/movieApi";
 import { FavoriteButton, Loader } from "../../components";
 import {
@@ -17,6 +17,8 @@ import {
 } from "./styled";
 import { useHeader } from "../../hooks/useHeader";
 import type { MovieDetails } from "../../types";
+import { useErrorBoundary } from "react-error-boundary";
+
 export function Movie() {
   useHeader({
     backButton: true,
@@ -24,16 +26,23 @@ export function Movie() {
   });
   const { id } = useParams();
   const { data: movie, isLoading, error } = useGetMovieDetailsQuery(Number(id));
-
+  const { showBoundary } = useErrorBoundary();
   if (isLoading) return <Loader />;
-  if (error || !movie) return <div>Error loading movie</div>;
+  if (!movie) return <Navigate to="/" />;
+  if (error) {
+    showBoundary(error);
+    return null;
+  }
   return (
     <Container>
       <Card>
         <Poster
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          // this is decarative element, so it doesn't need alt text
-          alt={""}
+          src={
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              : "/placeholder.jpg"
+          }
+          alt={`${movie.title} poster`}
         />
         <Info>
           <Title>

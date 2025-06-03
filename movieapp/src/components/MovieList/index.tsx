@@ -1,28 +1,41 @@
-import type { Movie } from "../../types/movie";
+import type { Movie } from "../../types";
 import { MovieCard } from "../MovieCard";
 import { MovieListWrapper } from "./styled";
-import { usePagination } from "../../hooks";
+import { calculateTotalPages } from "../../helpers";
+import { Pagination } from "../Pagination";
+import { Loader } from "../Loader";
+import { EmptyList } from "../EmptyList";
 
 interface Props {
-  movies: Movie[];
+  movies?: Movie[];
   totalPages?: number;
+  isFetching?: boolean;
 }
 
-export function MovieList({ movies, totalPages }: Props) {
-  const { paginationComponent } = usePagination({
-    itemsCount: movies.length,
-    totalPages,
-  });
+export function MovieList({ movies, totalPages, isFetching }: Props) {
+  if (movies?.length === 0) {
+    return <EmptyList message="No movies found" />;
+  }
+  const pagination = (
+    <Pagination
+      totalPages={totalPages || calculateTotalPages(movies?.length || 0)}
+      disabled={isFetching}
+    />
+  );
 
   return (
     <>
-      {paginationComponent}
-      <MovieListWrapper>
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
-      </MovieListWrapper>
-      {paginationComponent}
+      {pagination}
+      {isFetching ? (
+        <Loader />
+      ) : (
+        <MovieListWrapper>
+          {movies?.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
+        </MovieListWrapper>
+      )}
+      {pagination}
     </>
   );
 }

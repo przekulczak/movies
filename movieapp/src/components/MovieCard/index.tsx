@@ -7,6 +7,7 @@ interface Props {
 }
 
 export function MovieCard({ movie }: Props) {
+  console.log("poster path", movie.poster_path);
   return (
     <Card>
       <div>

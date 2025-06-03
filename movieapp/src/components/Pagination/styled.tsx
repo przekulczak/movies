@@ -15,7 +15,7 @@ export const Button = styled.button<{ $active?: boolean }>`
   border-radius: 4px;
   background: ${(props) =>
     props.$active ? colors.buttonActive : colors.buttonDisabled};
-  color: white;
+  color: ${colors.textPrimary};
   cursor: pointer;
   transition: background-color 0.2s;
 
@@ -25,12 +25,12 @@ export const Button = styled.button<{ $active?: boolean }>`
   }
 
   &:disabled {
-    background: #1a1a1a;
+    background: ${colors.backgroundSecondary};
     cursor: not-allowed;
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #535bf2;
+    box-shadow: 0 0 0 2px ${colors.buttonActiveFocus};
   }
 `;

@@ -9,13 +9,12 @@ export const SpinnerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 200px;
+  min-height: 80vh;
 `;
 
 export const Spinner = styled.div`
   width: 50px;
   height: 50px;
-  border: 5px solid #1a1a1a;
   border-top: 5px solid #646cff;
   border-radius: 50%;
   animation: ${spin} 1s linear infinite;

@@ -1,7 +1,10 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../store/store";
-import { addFavorite, removeFavorite } from "../../store/favoritesSlice";
+import { selectFavorites } from "../../store/favourites/selectors";
+import {
+  addFavorite,
+  removeFavorite,
+} from "../../store/favourites/favoritesSlice";
 import { StyledFavouriteButton } from "./styled";
 
 interface Props {
@@ -10,9 +13,7 @@ interface Props {
 
 export function FavoriteButton({ movieId }: Props) {
   const dispatch = useDispatch();
-  const favorites = useSelector(
-    (state: RootState) => state.favorites.favorites
-  );
+  const favorites = useSelector(selectFavorites);
   const isFavorite = favorites.includes(movieId);
 
   const toggleFavorite = () => {

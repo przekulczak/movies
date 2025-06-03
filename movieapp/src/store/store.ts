@@ -1,7 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { movieApi } from "./movieApi";
-import favoritesReducer from "../store/favoritesSlice";
-import headerReducer from "../store/headerSlice";
+import favoritesReducer from "./favourites/favoritesSlice";
+import headerReducer from "./header/headerSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 

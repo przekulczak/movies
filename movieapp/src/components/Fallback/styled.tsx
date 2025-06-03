@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../config";
 
 export const Container = styled.div`
   padding: 2rem;
@@ -14,16 +15,16 @@ export const Message = styled.p`
 `;
 
 export const ErrorMessage = styled.pre`
-  color: red;
+  color: ${colors.error};
   margin: 0;
   padding: 1rem;
-  background: rgba(255, 0, 0, 0.1);
+  background: ${colors.errorBackground};
   border-radius: 4px;
 `;
 
 export const RetryButton = styled.button`
-  background: #646cff;
-  color: white;
+  background: ${colors.buttonActive};
+  color: ${colors.textPrimary};
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -31,6 +32,6 @@ export const RetryButton = styled.button`
   font-size: 1rem;
 
   &:hover {
-    background: #535bf2;
+    background: ${colors.buttonActiveHover};
   }
 `;

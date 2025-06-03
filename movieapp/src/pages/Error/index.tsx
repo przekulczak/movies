@@ -1,6 +1,7 @@
 import { ErrorBoundary } from "react-error-boundary";
 import type { FallbackProps } from "react-error-boundary";
 import styled from "styled-components";
+import { colors } from "../../config";
 
 const ErrorContainer = styled.section`
   display: flex;
@@ -10,19 +11,19 @@ const ErrorContainer = styled.section`
   min-height: 400px;
   padding: 2rem;
   text-align: center;
-  background: #1a1a1a;
+  background: ${colors.backgroundSecondary};
   border-radius: 8px;
   margin: 2rem;
 `;
 
 const ErrorTitle = styled.h2`
-  color: #ff4d4d;
+  color: ${colors.error};
   margin-bottom: 1rem;
   font-size: 1.5rem;
 `;
 
 const ErrorMessage = styled.p`
-  color: #ffffff;
+  color: ${colors.textPrimary};
   margin-bottom: 1.5rem;
   font-size: 1rem;
   max-width: 600px;
@@ -30,7 +31,7 @@ const ErrorMessage = styled.p`
 
 const RetryButton = styled.button`
   background: #ff4d4d;
-  color: white;
+  color: ${colors.textPrimary};
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 4px;

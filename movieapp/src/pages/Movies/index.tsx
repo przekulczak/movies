@@ -1,31 +1,34 @@
-import { useState } from "react";
-import { SearchInput, Loader, MovieList } from "../../components";
+import { MovieList } from "../../components";
 import { useSearchMoviesQuery } from "../../store/movieApi";
 import { useHeader } from "../../hooks/useHeader";
 import { useErrorBoundary } from "react-error-boundary";
-import { usePagination } from "../../hooks";
+import { headerContent } from "../../data";
+import { SearchInput } from "../../components";
+import { useSearch, usePageParams } from "../../hooks";
 
 export function Movies() {
   useHeader({
     backButton: false,
-    content: [{ name: "Favorites", href: "/favourites" }],
+    content: [headerContent.FAVORITES],
+    title: "Search",
   });
   const { showBoundary } = useErrorBoundary();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [query, setQuery] = useState("");
-  const { page, setPage } = usePagination({});
+  const { page, setPage } = usePageParams();
+  const { query, setQuery, debouncedQuery, isTyping } = useSearch();
 
-  const { data, isLoading, error } = useSearchMoviesQuery(
-    { query, page },
-    { skip: !query }
+  const { data, isFetching, error } = useSearchMoviesQuery(
+    { query: debouncedQuery, page },
+    { skip: !debouncedQuery }
   );
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+    setPage(1);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery) {
-      setQuery(searchQuery);
-      setPage(1);
-    }
+    setQuery(debouncedQuery);
   };
 
   if (error) {
@@ -33,21 +36,15 @@ export function Movies() {
   }
 
   return (
-    <>
-      <SearchInput
-        value={searchQuery}
-        onChange={setSearchQuery}
-        onSubmit={handleSubmit}
-        isLoading={isLoading}
-      />
-      {/* handle empty results */}
-      {isLoading ? (
-        <Loader />
-      ) : (
-        data && (
-          <MovieList movies={data.results} totalPages={data.total_pages} />
-        )
+    <form onSubmit={handleSubmit}>
+      <SearchInput value={query} onChange={handleSearch} />
+      {data && (
+        <MovieList
+          movies={data.results}
+          totalPages={data.total_pages}
+          isFetching={isFetching || isTyping}
+        />
       )}
-    </>
+    </form>
   );
 }

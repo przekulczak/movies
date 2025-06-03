@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../config";
 
 export const Container = styled.div`
   display: flex;
@@ -13,20 +14,20 @@ export const Input = styled.input`
   flex: 1;
   padding: 12px 20px;
   font-size: 1rem;
-  border: 2px solid #2a2a2a;
+  border: 2px solid ${colors.backgroundSecondary};
   border-radius: 8px;
-  background: #1a1a1a;
-  color: white;
+  background: ${colors.backgroundSecondary};
+  color: ${colors.textPrimary};
   transition: border-color 0.2s;
   height: 40px;
 
   &:focus {
     outline: none;
-    border-color: #646cff;
+    border-color: ${colors.buttonActive};
   }
 
   &::placeholder {
-    color: #666;
+    color: ${colors.textSecondary};
   }
 `;
 
@@ -35,28 +36,28 @@ export const Button = styled.button`
   font-size: 1rem;
   border: none;
   border-radius: 8px;
-  background: #646cff;
-  color: white;
+  background: ${colors.buttonActive};
+  color: ${colors.textPrimary};
   cursor: pointer;
   transition: background-color 0.2s;
 
   &:hover {
-    background: #535bf2;
+    background: ${colors.buttonActiveHover};
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #535bf2;
+    box-shadow: 0 0 0 2px ${colors.buttonActiveFocus};
   }
 
   &:disabled {
-    background: #3a3a3a;
+    background: ${colors.buttonDisabled};
     cursor: not-allowed;
   }
 `;
 
 export const Label = styled.label`
-  color: white;
+  color: ${colors.textPrimary};
   font-size: 1rem;
   margin-bottom: 4px;
   margin-left: 7px;

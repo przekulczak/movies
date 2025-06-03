@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Topbar } from "./components";
 import { Movies, Movie, Favourites } from "./pages";
+
 function App() {
   return (
     <>
@@ -10,6 +11,7 @@ function App() {
           <Route path="/" element={<Movies />} />
           <Route path="/movie/:id" element={<Movie />} />
           <Route path="/favourites" element={<Favourites />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </>

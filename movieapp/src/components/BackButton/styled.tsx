@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { colors } from "../../config";
 
 export const Back = styled.button`
-  background: #2a2a2a;
-  color: white;
+  background: ${colors.backgroundSecondary};
+  color: ${colors.textPrimary};
   border: none;
   padding: 8px 16px;
   border-radius: 8px;

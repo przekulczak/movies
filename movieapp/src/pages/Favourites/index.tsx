@@ -1,55 +1,48 @@
-import { useGetMultipleMoviesQuery } from "../../store/movieApi";
-import { MovieList, Loader } from "../../components";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../store/store";
-import { Container, EmptyState } from "./styled";
+import { useGetMultipleMoviesQuery } from "../../store/movieApi";
+import { MovieList } from "../../components";
 import { useHeader } from "../../hooks/useHeader";
 import { useErrorBoundary } from "react-error-boundary";
+import { calculateTotalPages } from "../../helpers";
+import {
+  selectFavoritesCount,
+  selectPaginatedFavorites,
+} from "../../store/favourites/selectors";
+import { headerContent } from "../../data";
+import { usePageParams } from "../../hooks";
 
 export function Favourites() {
-  const favorites = useSelector(
-    (state: RootState) => state.favorites.favorites
-  );
+  const { page } = usePageParams();
+  const favouritesCount = useSelector(selectFavoritesCount);
+  const currentPageFavourites = useSelector(selectPaginatedFavorites(page));
+  const totalPages = calculateTotalPages(favouritesCount);
+
   const { showBoundary } = useErrorBoundary();
 
   useHeader({
     backButton: false,
-    content: [{ name: "Search", href: "/" }],
+    content: [headerContent.SEARCH],
+    title: "Favourites",
   });
 
   const {
     data: movies,
+    isFetching,
     isLoading,
     error,
-  } = useGetMultipleMoviesQuery(favorites, {
-    skip: favorites.length === 0,
+  } = useGetMultipleMoviesQuery(currentPageFavourites, {
+    skip: currentPageFavourites.length === 0,
   });
-
-  if (favorites.length === 0) {
-    return (
-      <Container>
-        <EmptyState>
-          No favorite movies yet. Add some movies to your favorites!
-        </EmptyState>
-      </Container>
-    );
-  }
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   if (error) {
     showBoundary(error);
   }
 
-  if (!movies) {
-    return null;
-  }
-
   return (
-    <Container>
-      <MovieList movies={movies} />
-    </Container>
+    <MovieList
+      movies={movies}
+      totalPages={totalPages}
+      isFetching={isFetching || isLoading}
+    />
   );
 }
