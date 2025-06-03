@@ -77,6 +77,8 @@ The project includes an experimental simple backend. In production, API communic
 pnpm dev:backend
 ```
 
+from the frontend folder.
+
 ### Running with Docker
 
 To run both frontend and backend in containers:
