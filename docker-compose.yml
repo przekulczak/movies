@@ -3,12 +3,12 @@ version: "3.8"
 services:
   frontend:
     build:
-      context: ./movieapp
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "5173:5173"
     volumes:
-      - ./movieapp:/app
+      - ./frontend:/app
       - /app/node_modules
     environment:
       - VITE_API_URL=http://backend:8000

@@ -18,7 +18,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "cd movieapp && pnpm dev",
+    command: "cd frontend && pnpm dev",
     url: "http://localhost:5173",
     reuseExistingServer: !process.env.CI,
   },
