@@ -35,6 +35,12 @@ pnpm test:ui
 
 ## Features
 
+### React Compiler
+The project uses the experimental React Compiler (previously known as React Forget) for automatic memoization. This helps optimize performance by automatically memoizing components and their dependencies, reducing unnecessary re-renders. The compiler is configured through:
+- `babel-plugin-react-compiler` for build-time optimization
+- `eslint-plugin-react-compiler` for development-time checks
+- `react-compiler-runtime` for runtime support
+
 ### Home Page with Search
 The main page features a search input and results display. The search works without requiring a form submission - the API query is sent automatically as you type. The search state is maintained in the URL bar, allowing users to bookmark specific searches or share the page with others. Both the API query and URL updates are debounced for better performance.
 
